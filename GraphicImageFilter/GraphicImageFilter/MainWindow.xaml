@@ -1,0 +1,47 @@
+﻿<Window x:Class="GraphicImageFilter.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GraphicImageFilter"
+        xmlns:viewmodel="clr-namespace:GraphicImageFilter.VMs"
+        xmlns:model="clr-namespace:GraphicImageFilter.Models"
+        mc:Ignorable="d"
+        Title="Image filter" MinHeight="800" MinWidth="1000">
+    <Window.DataContext>
+        <viewmodel:MainVM/>
+    </Window.DataContext>
+    <Grid MinWidth="800" MinHeight="1000">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="449"/>
+            <ColumnDefinition Width="600*" MinWidth="500"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical" Grid.Column="0" Width="449" Height="1000">
+            <Button Content="New file" Command="{Binding LoadMedia}" Height="75" Margin="0,0,0,0" />
+            <Button Content="Gray Scale" Command="{Binding GrayScale}" Height="75" Margin="0,10,0,0" />
+
+            <Label Content="Red:" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Center"/>
+            <Slider x:Name="RedSlider" Margin="40,-20,40,0" Minimum="0" Maximum="255" SmallChange="1" LargeChange="10" Value="{Binding Red}"/>
+            <Label Content="{Binding Value, ElementName=RedSlider}" HorizontalAlignment="Right" Margin="0,-20,0,0" VerticalAlignment="Center"/>
+
+            <Label Content="Green:" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Center"/>
+            <Slider x:Name="GreenSlider" Margin="40,-20,40,0" Minimum="0" Maximum="255" SmallChange="1" LargeChange="10" Value="{Binding Green}"/>
+            <Label Content="{Binding Value, ElementName=GreenSlider}" HorizontalAlignment="Right" Margin="0,-20,0,0" VerticalAlignment="Center"/>
+
+            <Label Content="Blue:" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Center"/>
+            <Slider x:Name="BlueSlider" Margin="40,-20,40,0" Minimum="0" Maximum="255" SmallChange="1" LargeChange="10" Value="{Binding Blue}"/>
+            <Label Content="{Binding Value, ElementName=BlueSlider}" HorizontalAlignment="Right" Margin="0,-20,0,0" VerticalAlignment="Center"/>
+
+            <Button Content="Colour Folder" Command="{Binding ColourFolder}" Height="75" Margin="0,10,0,0" />
+            <Button Content="Colour Corection" Command="{Binding ColourCorrection}" Height="75" Margin="0,10,0,0" />
+            <Button Content="Blur Image" Command="{Binding Blur}" Height="75" Margin="0,10,0,0" />
+            <Label Content="Time:" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Center"/>
+            <TextBlock TextWrapping="Wrap" Text="{Binding Time}" TextAlignment="Left" Margin="40,-20,0,0" />
+            <Button Content="Blur Image Parallel" Command="{Binding BlurParallel}" Height="75" Margin="0,10,0,0" />
+            <Button Content="Return All Changes" Command="{Binding ReturnChanges}" Height="75" Margin="0,10,0,0" />
+        </StackPanel>
+
+        <Image Name="Picture" Grid.Column="1" Source="{Binding ImageSource}" Effect="{Binding ImageEffect}" MinHeight="1000" MinWidth="1551" Margin="10,10,10,10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>
